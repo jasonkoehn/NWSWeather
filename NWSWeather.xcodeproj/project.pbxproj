@@ -8,18 +8,36 @@
 
 /* Begin PBXBuildFile section */
 		877F15BF2AB381FA00B3AFC2 /* NWSWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F15BE2AB381FA00B3AFC2 /* NWSWeatherApp.swift */; };
-		877F15C12AB381FA00B3AFC2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F15C02AB381FA00B3AFC2 /* ContentView.swift */; };
 		877F15C32AB381FB00B3AFC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877F15C22AB381FB00B3AFC2 /* Assets.xcassets */; };
 		877F15C72AB381FB00B3AFC2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877F15C62AB381FB00B3AFC2 /* Preview Assets.xcassets */; };
+		879270BD2AB9FC9C004AC834 /* NewLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879270BC2AB9FC9C004AC834 /* NewLocationView.swift */; };
+		87A9390D2AB4AA8500EE4E21 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9390C2AB4AA8500EE4E21 /* AppView.swift */; };
+		87A939102AB4B84900EE4E21 /* UserLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9390F2AB4B84900EE4E21 /* UserLocationManager.swift */; };
+		87A939122AB4B85A00EE4E21 /* LocationSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A939112AB4B85A00EE4E21 /* LocationSearchManager.swift */; };
+		87A939162AB4BC1D00EE4E21 /* ViewDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A939152AB4BC1D00EE4E21 /* ViewDataModels.swift */; };
+		87A939182AB4BC4400EE4E21 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A939172AB4BC4400EE4E21 /* DataManager.swift */; };
+		87A9391A2AB4BDE100EE4E21 /* ApiDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A939192AB4BDE100EE4E21 /* ApiDataModels.swift */; };
+		87A9391C2AB8D65100EE4E21 /* LocationsHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9391B2AB8D65100EE4E21 /* LocationsHomeView.swift */; };
+		87A9391E2AB8D87B00EE4E21 /* LocationSearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9391D2AB8D87B00EE4E21 /* LocationSearchResultsView.swift */; };
+		87A939202AB8D9A800EE4E21 /* LocationListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A9391F2AB8D9A800EE4E21 /* LocationListRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		877F15BB2AB381FA00B3AFC2 /* NWSWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWSWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		877F15BE2AB381FA00B3AFC2 /* NWSWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NWSWeatherApp.swift; sourceTree = "<group>"; };
-		877F15C02AB381FA00B3AFC2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		877F15C22AB381FB00B3AFC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		877F15C42AB381FB00B3AFC2 /* NWSWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NWSWeather.entitlements; sourceTree = "<group>"; };
 		877F15C62AB381FB00B3AFC2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		879270BC2AB9FC9C004AC834 /* NewLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewLocationView.swift; sourceTree = "<group>"; };
+		87A9390C2AB4AA8500EE4E21 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		87A9390F2AB4B84900EE4E21 /* UserLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationManager.swift; sourceTree = "<group>"; };
+		87A939112AB4B85A00EE4E21 /* LocationSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchManager.swift; sourceTree = "<group>"; };
+		87A939152AB4BC1D00EE4E21 /* ViewDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataModels.swift; sourceTree = "<group>"; };
+		87A939172AB4BC4400EE4E21 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		87A939192AB4BDE100EE4E21 /* ApiDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiDataModels.swift; sourceTree = "<group>"; };
+		87A9391B2AB8D65100EE4E21 /* LocationsHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsHomeView.swift; sourceTree = "<group>"; };
+		87A9391D2AB8D87B00EE4E21 /* LocationSearchResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchResultsView.swift; sourceTree = "<group>"; };
+		87A9391F2AB8D9A800EE4E21 /* LocationListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +71,10 @@
 			isa = PBXGroup;
 			children = (
 				877F15BE2AB381FA00B3AFC2 /* NWSWeatherApp.swift */,
-				877F15C02AB381FA00B3AFC2 /* ContentView.swift */,
+				87A9390C2AB4AA8500EE4E21 /* AppView.swift */,
+				87A939142AB4BC0D00EE4E21 /* Views */,
+				87A939132AB4BBFE00EE4E21 /* DataManagement */,
+				87A9390E2AB4B81500EE4E21 /* LocationManagement */,
 				877F15C22AB381FB00B3AFC2 /* Assets.xcassets */,
 				877F15C42AB381FB00B3AFC2 /* NWSWeather.entitlements */,
 				877F15C52AB381FB00B3AFC2 /* Preview Content */,
@@ -67,6 +88,36 @@
 				877F15C62AB381FB00B3AFC2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		87A9390E2AB4B81500EE4E21 /* LocationManagement */ = {
+			isa = PBXGroup;
+			children = (
+				87A9390F2AB4B84900EE4E21 /* UserLocationManager.swift */,
+				87A939112AB4B85A00EE4E21 /* LocationSearchManager.swift */,
+			);
+			path = LocationManagement;
+			sourceTree = "<group>";
+		};
+		87A939132AB4BBFE00EE4E21 /* DataManagement */ = {
+			isa = PBXGroup;
+			children = (
+				87A939172AB4BC4400EE4E21 /* DataManager.swift */,
+				87A939152AB4BC1D00EE4E21 /* ViewDataModels.swift */,
+				87A939192AB4BDE100EE4E21 /* ApiDataModels.swift */,
+			);
+			path = DataManagement;
+			sourceTree = "<group>";
+		};
+		87A939142AB4BC0D00EE4E21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				87A9391B2AB8D65100EE4E21 /* LocationsHomeView.swift */,
+				87A9391F2AB8D9A800EE4E21 /* LocationListRowView.swift */,
+				87A9391D2AB8D87B00EE4E21 /* LocationSearchResultsView.swift */,
+				879270BC2AB9FC9C004AC834 /* NewLocationView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +190,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				877F15C12AB381FA00B3AFC2 /* ContentView.swift in Sources */,
+				879270BD2AB9FC9C004AC834 /* NewLocationView.swift in Sources */,
+				87A9391A2AB4BDE100EE4E21 /* ApiDataModels.swift in Sources */,
+				87A939122AB4B85A00EE4E21 /* LocationSearchManager.swift in Sources */,
+				87A9391C2AB8D65100EE4E21 /* LocationsHomeView.swift in Sources */,
+				87A939182AB4BC4400EE4E21 /* DataManager.swift in Sources */,
 				877F15BF2AB381FA00B3AFC2 /* NWSWeatherApp.swift in Sources */,
+				87A939162AB4BC1D00EE4E21 /* ViewDataModels.swift in Sources */,
+				87A939202AB8D9A800EE4E21 /* LocationListRowView.swift in Sources */,
+				87A9390D2AB4AA8500EE4E21 /* AppView.swift in Sources */,
+				87A939102AB4B84900EE4E21 /* UserLocationManager.swift in Sources */,
+				87A9391E2AB8D87B00EE4E21 /* LocationSearchResultsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +334,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To get the weather for your location.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -292,7 +353,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonkoehn.NWSWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -312,6 +375,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "To get the weather for your location.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -330,7 +394,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.jasonkoehn.NWSWeather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
