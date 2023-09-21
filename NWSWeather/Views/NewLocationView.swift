@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NewLocationView: View {
     @EnvironmentObject var dataManager: DataManager
     @Environment(\.modelContext) private var context
     @Environment var dismissSearch: DismissSearchAction
     @Environment(\.dismiss) var dismiss
+    @Query private var locations: [Location]
     var city: String
     var state: String
     var latitude: Double
@@ -32,7 +34,7 @@ struct NewLocationView: View {
         .task {
             if let location = await dataManager.locationUrlsRequest(latitude: latitude, longitude: longitude) {
                 if let forecast = await dataManager.getForecast(url: location.forecast) {
-                    locationInfo = Location(city: city, state: state, dailyForecast: forecast, officeId: location.gridId, dailyForecastUrl: location.forecast, hourlyForecastUrl: location.forecastHourly)
+                    locationInfo = Location(sortOrder: 0, city: city, state: state, dailyForecast: forecast, officeId: location.gridId, dailyForecastUrl: location.forecast, hourlyForecastUrl: location.forecastHourly)
                 }
             }
         }
@@ -47,7 +49,8 @@ struct NewLocationView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 if let locationInfo = locationInfo {
                     Button(action: {
-                        let location = Location(city: city, state: state, dailyForecast: [], officeId: locationInfo.officeId, dailyForecastUrl: locationInfo.dailyForecastUrl, hourlyForecastUrl: locationInfo.hourlyForecastUrl)
+                        let newSortNumber = locations.count + 1
+                        let location = Location(sortOrder: newSortNumber, city: city, state: state, dailyForecast: [], officeId: locationInfo.officeId, dailyForecastUrl: locationInfo.dailyForecastUrl, hourlyForecastUrl: locationInfo.hourlyForecastUrl)
                         context.insert(location)
                         dismissSearch()
                         dismiss()

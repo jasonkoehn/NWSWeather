@@ -11,7 +11,7 @@ class DataManager: ObservableObject {
     
     // Info for user location
     func userLocationForecast(latitude: Double, longitude: Double) async -> Location? {
-        let location: Location = Location(city: "", state: "", dailyForecast: [], officeId: "", dailyForecastUrl: "", hourlyForecastUrl: "")
+        let location: Location = Location(sortOrder: 0, city: "", state: "", dailyForecast: [], officeId: "", dailyForecastUrl: "", hourlyForecastUrl: "")
         UserLocationManager().getUserAddress(latitude: latitude, longitude: longitude) { place, error in
             location.city = place?.locality ?? ""
             location.state = place?.administrativeArea ?? ""

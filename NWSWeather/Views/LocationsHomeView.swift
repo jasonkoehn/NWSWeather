@@ -13,7 +13,7 @@ struct LocationsHomeView: View {
     @EnvironmentObject private var locationSearchManager: LocationSearchManager
     @EnvironmentObject private var dataManager: DataManager
     @Environment(\.modelContext) private var context
-    @Query private var locations: [Location]
+    @Query(sort: \Location.sortOrder) private var locations: [Location]
     @State private var userLocation: Location?
     @State var hasLoadedLocations: Bool = false
     var body: some View {
@@ -33,14 +33,18 @@ struct LocationsHomeView: View {
                     
                     // MARK: Other Locations
                     ForEach(locations) { location in
-                        LocationListRowView(location: location)
+                        if hasLoadedLocations {
+                            LocationListRowView(location: location)
+                        } else {
+                            Text("Loading...")
+                        }
                     }
                     .onDelete(perform: { indexSet in
                         for index in indexSet {
                             context.delete(locations[index])
                         }
                     })
-//                    .onMove(perform: move)
+                    .onMove(perform: move)
                 }
                 .navigationTitle("Weather")
                 .listStyle(.plain)
@@ -59,13 +63,30 @@ struct LocationsHomeView: View {
                     location.dailyForecast = forecast
                 }
             }
-            try? context.save()
             hasLoadedLocations = true
         }
     }
-//    func move(from source: IndexSet, to destination: Int) {
-//        locations.move(fromOffsets: source, toOffset: destination)
-//    }
+    
+    // Move function
+    func move(from source: IndexSet, to destination: Int) {
+        var sortedLocations: [Location] = locations
+        var newSortOrder: Int = 1
+        sortedLocations.sort {
+            $0.sortOrder < $1.sortOrder
+        }
+        sortedLocations.move(fromOffsets: source, toOffset: destination)
+        for sortedLocation in sortedLocations {
+            sortedLocation.sortOrder = newSortOrder
+            newSortOrder += 1
+        }
+        for location in locations {
+            for sortedLocation in sortedLocations {
+                if sortedLocation.id == location.id {
+                    location.sortOrder = sortedLocation.sortOrder
+                }
+            }
+        }
+    }
 }
 
 #Preview {

@@ -12,6 +12,7 @@ import SwiftData
 @Model
 class Location {
     var id: UUID
+    var sortOrder: Int // For list reordering
     var city: String
     var state: String
     @Transient var dailyForecast: [Forecast] = []
@@ -22,8 +23,9 @@ class Location {
     var hourlyForecastUrl: String
     
     // Initializer
-    init(city: String, state: String, dailyForecast: [Forecast], officeId: String, dailyForecastUrl: String, hourlyForecastUrl: String) {
+    init(sortOrder: Int, city: String, state: String, dailyForecast: [Forecast], officeId: String, dailyForecastUrl: String, hourlyForecastUrl: String) {
         self.id = UUID()
+        self.sortOrder = sortOrder
         self.city = city
         self.state = state
         self.dailyForecast = dailyForecast
@@ -31,6 +33,17 @@ class Location {
         self.dailyForecastUrl = dailyForecastUrl
         self.hourlyForecastUrl = hourlyForecastUrl
     }
+}
+
+struct UserLocation {
+    var city: String
+    var state: String
+    var dailyForecast: [Forecast]
+    
+    // Url Storage
+    var officeId: String
+    var dailyForecastUrl: String
+    var hourlyForecastUrl: String
 }
 
 struct Forecast: Codable, Equatable, Identifiable {
