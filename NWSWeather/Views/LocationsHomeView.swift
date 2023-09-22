@@ -27,17 +27,13 @@ struct LocationsHomeView: View {
                         LocationListRowView(location: location)
                     } else {
                         // Loading View
-                        Text("Loading User")
+                        Text("Loading Location")
                     }
                     
                     
                     // MARK: Other Locations
                     ForEach(locations) { location in
-                        if hasLoadedLocations {
-                            LocationListRowView(location: location)
-                        } else {
-                            Text("Loading...")
-                        }
+                        LocationListRowView(location: location)
                     }
                     .onDelete(perform: { indexSet in
                         for index in indexSet {
@@ -57,13 +53,7 @@ struct LocationsHomeView: View {
         }
         .searchable(text: $locationSearchManager.searchText)
         .task {
-            userLocation = await dataManager.userLocationForecast(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude)
-            for location in locations {
-                if let forecast = await dataManager.getForecast(url: location.dailyForecastUrl) {
-                    location.dailyForecast = forecast
-                }
-            }
-            hasLoadedLocations = true
+            userLocation = await dataManager.getUserLocation(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude)
         }
     }
     

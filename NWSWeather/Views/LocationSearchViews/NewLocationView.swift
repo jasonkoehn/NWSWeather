@@ -19,12 +19,13 @@ struct NewLocationView: View {
     var latitude: Double
     var longitude: Double
     @State var locationInfo: Location? = nil
+    @State private var forecast: [Forecast]?
     var body: some View {
         ScrollView {
             VStack {
                 Text(city)
                 Text(state)
-                if let forecast = locationInfo?.dailyForecast {
+                if let forecast = forecast {
                     ForEach(forecast) { period in
                         Text("\(period.temperature)")
                     }
@@ -33,9 +34,10 @@ struct NewLocationView: View {
         }
         .task {
             if let location = await dataManager.locationUrlsRequest(latitude: latitude, longitude: longitude) {
-                if let forecast = await dataManager.getForecast(url: location.forecast) {
-                    locationInfo = Location(sortOrder: 0, city: city, state: state, dailyForecast: forecast, officeId: location.gridId, dailyForecastUrl: location.forecast, hourlyForecastUrl: location.forecastHourly)
-                }
+                    locationInfo = Location(sortOrder: 0, city: city, state: state, officeId: location.gridId, dailyForecastUrl: location.forecast, hourlyForecastUrl: location.forecastHourly)
+            }
+            if let forecast = await dataManager.getForecast(url: locationInfo?.dailyForecastUrl ?? "") {
+                self.forecast = forecast
             }
         }
         .toolbar {
@@ -50,7 +52,7 @@ struct NewLocationView: View {
                 if let locationInfo = locationInfo {
                     Button(action: {
                         let newSortNumber = locations.count + 1
-                        let location = Location(sortOrder: newSortNumber, city: city, state: state, dailyForecast: [], officeId: locationInfo.officeId, dailyForecastUrl: locationInfo.dailyForecastUrl, hourlyForecastUrl: locationInfo.hourlyForecastUrl)
+                        let location = Location(sortOrder: newSortNumber, city: city, state: state, officeId: locationInfo.officeId, dailyForecastUrl: locationInfo.dailyForecastUrl, hourlyForecastUrl: locationInfo.hourlyForecastUrl)
                         context.insert(location)
                         dismissSearch()
                         dismiss()

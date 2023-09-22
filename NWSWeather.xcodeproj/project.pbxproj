@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8721DB3E2ABCF6A600654523 /* LocationWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721DB3D2ABCF6A600654523 /* LocationWeatherView.swift */; };
+		8721DB412ABDFF0900654523 /* WeatherTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721DB402ABDFF0900654523 /* WeatherTileView.swift */; };
+		8721DB442ABDFFD400654523 /* ShimmerEffectAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721DB432ABDFFD400654523 /* ShimmerEffectAnimationView.swift */; };
+		8721DB462ABE006B00654523 /* ForecastDiscussionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8721DB452ABE006B00654523 /* ForecastDiscussionView.swift */; };
 		877F15BF2AB381FA00B3AFC2 /* NWSWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877F15BE2AB381FA00B3AFC2 /* NWSWeatherApp.swift */; };
 		877F15C32AB381FB00B3AFC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877F15C22AB381FB00B3AFC2 /* Assets.xcassets */; };
 		877F15C72AB381FB00B3AFC2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 877F15C62AB381FB00B3AFC2 /* Preview Assets.xcassets */; };
@@ -23,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8721DB3D2ABCF6A600654523 /* LocationWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWeatherView.swift; sourceTree = "<group>"; };
+		8721DB402ABDFF0900654523 /* WeatherTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTileView.swift; sourceTree = "<group>"; };
+		8721DB432ABDFFD400654523 /* ShimmerEffectAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffectAnimationView.swift; sourceTree = "<group>"; };
+		8721DB452ABE006B00654523 /* ForecastDiscussionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastDiscussionView.swift; sourceTree = "<group>"; };
 		877F15BB2AB381FA00B3AFC2 /* NWSWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWSWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		877F15BE2AB381FA00B3AFC2 /* NWSWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NWSWeatherApp.swift; sourceTree = "<group>"; };
 		877F15C22AB381FB00B3AFC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8721DB3F2ABDFEE900654523 /* LocationSearchViews */ = {
+			isa = PBXGroup;
+			children = (
+				87A9391D2AB8D87B00EE4E21 /* LocationSearchResultsView.swift */,
+				879270BC2AB9FC9C004AC834 /* NewLocationView.swift */,
+			);
+			path = LocationSearchViews;
+			sourceTree = "<group>";
+		};
+		8721DB422ABDFFB300654523 /* PlaceholderViews */ = {
+			isa = PBXGroup;
+			children = (
+				8721DB432ABDFFD400654523 /* ShimmerEffectAnimationView.swift */,
+			);
+			path = PlaceholderViews;
+			sourceTree = "<group>";
+		};
 		877F15B22AB381FA00B3AFC2 = {
 			isa = PBXGroup;
 			children = (
@@ -114,8 +139,11 @@
 			children = (
 				87A9391B2AB8D65100EE4E21 /* LocationsHomeView.swift */,
 				87A9391F2AB8D9A800EE4E21 /* LocationListRowView.swift */,
-				87A9391D2AB8D87B00EE4E21 /* LocationSearchResultsView.swift */,
-				879270BC2AB9FC9C004AC834 /* NewLocationView.swift */,
+				8721DB3D2ABCF6A600654523 /* LocationWeatherView.swift */,
+				8721DB402ABDFF0900654523 /* WeatherTileView.swift */,
+				8721DB452ABE006B00654523 /* ForecastDiscussionView.swift */,
+				8721DB3F2ABDFEE900654523 /* LocationSearchViews */,
+				8721DB422ABDFFB300654523 /* PlaceholderViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,11 +218,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8721DB3E2ABCF6A600654523 /* LocationWeatherView.swift in Sources */,
 				879270BD2AB9FC9C004AC834 /* NewLocationView.swift in Sources */,
 				87A9391A2AB4BDE100EE4E21 /* ApiDataModels.swift in Sources */,
 				87A939122AB4B85A00EE4E21 /* LocationSearchManager.swift in Sources */,
+				8721DB462ABE006B00654523 /* ForecastDiscussionView.swift in Sources */,
 				87A9391C2AB8D65100EE4E21 /* LocationsHomeView.swift in Sources */,
 				87A939182AB4BC4400EE4E21 /* DataManager.swift in Sources */,
+				8721DB442ABDFFD400654523 /* ShimmerEffectAnimationView.swift in Sources */,
+				8721DB412ABDFF0900654523 /* WeatherTileView.swift in Sources */,
 				877F15BF2AB381FA00B3AFC2 /* NWSWeatherApp.swift in Sources */,
 				87A939162AB4BC1D00EE4E21 /* ViewDataModels.swift in Sources */,
 				87A939202AB8D9A800EE4E21 /* LocationListRowView.swift in Sources */,

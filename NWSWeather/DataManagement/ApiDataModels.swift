@@ -55,3 +55,19 @@ struct ForecastItemsModel: Codable {
         var value: Double
     }
 }
+
+//ProductsApiModel
+struct ProductsFileModel: Codable {
+    var graph: [GraphModel]
+    enum CodingKeys: String, CodingKey {
+        case graph = "@graph"
+    }
+}
+struct GraphModel: Codable {
+    var id: String
+}
+
+//DiscussionApiModel
+struct DiscussionModel: Codable {
+    var productText: String
+}
