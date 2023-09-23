@@ -14,6 +14,7 @@ struct LocationWeatherView: View {
     var body: some View {
         ScrollView {
             VStack {
+                // Area Forcast Discussion
                 Button(action: {
                     showAFD.toggle()
                 }) {
@@ -27,6 +28,8 @@ struct LocationWeatherView: View {
                     .background(Color(.systemGray6))
                     .clipShape(.rect(cornerRadius: 10))
                 }
+                
+                // Weather Periods
                 ForEach(locationViewModel.dailyForecast) { period in
                     WeatherTileView(period: period)
                 }

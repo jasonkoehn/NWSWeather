@@ -15,7 +15,7 @@ struct LocationsHomeView: View {
     @Environment(\.modelContext) private var context
     @Query(sort: \Location.sortOrder) private var locations: [Location]
     @State private var userLocation: Location?
-    @State var hasLoadedLocations: Bool = false
+    @State private var showSettingsView: Bool = false
     var body: some View {
         NavigationStack {
             if locationSearchManager.searchText == "" {
@@ -24,7 +24,8 @@ struct LocationsHomeView: View {
                     
                     // MARK: User Location View
                     if let location = userLocation {
-                        LocationListRowView(location: location)
+                        LocationListRowView(location: location, isUserLocation: true)
+                            .listRowSeparator(.hidden)
                     } else {
                         // Loading View
                         Text("Loading Location")
@@ -33,7 +34,8 @@ struct LocationsHomeView: View {
                     
                     // MARK: Other Locations
                     ForEach(locations) { location in
-                        LocationListRowView(location: location)
+                        LocationListRowView(location: location, isUserLocation: false)
+                            .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: { indexSet in
                         for index in indexSet {
@@ -42,10 +44,16 @@ struct LocationsHomeView: View {
                     })
                     .onMove(perform: move)
                 }
-                .navigationTitle("Weather")
+                .navigationTitle("Weather Forecasts")
                 .listStyle(.plain)
                 .toolbar {
-                    EditButton()
+                    ToolbarItemGroup(placement: .topBarTrailing) {
+                        EditButton()
+                        NavigationLink(destination: SettingsView(), label: {
+                            Image(systemName: "gear")
+                                .font(.system(size: 16))
+                        })
+                    }
                 }
             } else {
                 LocationSearchResultsView()
