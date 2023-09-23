@@ -21,11 +21,12 @@ struct LocationWeatherView: View {
                     HStack {
                         Text("Area Forecast Discussion")
                             .font(.title2)
-                            .foregroundStyle(.white)
+                            .fontDesign(.serif)
+                            .foregroundStyle(Color.primary)
                         Spacer()
                     }
-                    .padding(10)
-                    .background(Color(.systemGray6))
+                    .padding(8)
+                    .background(Color(.systemGray4))
                     .clipShape(.rect(cornerRadius: 10))
                 }
                 
