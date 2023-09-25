@@ -11,14 +11,9 @@ class DataManager: ObservableObject {
     
     // Get LocationViewModel
     func getLocationViewModel(location: Location) async -> LocationViewModel? {
-        var locationViewModel: LocationViewModel = LocationViewModel(id: location.id, city: location.city, state: location.state, dailyForecast: [], hourlyForecast: [], forecastDiscussion: "")
-        if let dailyForecast = await getForecast(url: location.dailyForecastUrl) {
+        var locationViewModel: LocationViewModel = LocationViewModel(id: location.id, city: location.city, state: location.state, dailyForecast: [], forecastDiscussion: "")
+        if let dailyForecast = await getForecast(dailyForecastUrl: location.dailyForecastUrl, hourlyForecastUrl: location.hourlyForecastUrl) {
             locationViewModel.dailyForecast = dailyForecast
-        } else {
-            return nil
-        }
-        if let hourlyForecastUrl = await getForecast(url: location.hourlyForecastUrl) {
-            locationViewModel.hourlyForecast = hourlyForecastUrl
         } else {
             return nil
         }
@@ -50,16 +45,48 @@ class DataManager: ObservableObject {
     }
     
     // Forecast modeling
-    func getForecast(url: String) async -> [Forecast]? {
+    func getForecast(dailyForecastUrl: String, hourlyForecastUrl: String) async -> [Forecast]? {
         var forecast: [Forecast] = []
-        if let forecastRequest = await forecastUrlRequest(url: url) {
-            for item in forecastRequest {
-                forecast.append(Forecast(number: item.number, name: item.name, startTime: item.startTime, endTime: item.endTime, isDaytime: item.isDaytime, temperature: item.temperature, probabilityOfPrecipitation: Int(item.probabilityOfPrecipitation.value ?? 0), dewpointTemperature: celsiusToFahrenheit(celsius: item.dewpoint.value), relativeHumidity: Int(item.relativeHumidity.value), windSpeed: item.windSpeed, windDirection: item.windDirection, icon: item.icon, shortForecast: item.shortForecast, detailedForecast: item.detailedForecast))
+        if let forecastRequest = await forecastUrlRequest(url: dailyForecastUrl) {
+            if let hourlyForecast = await getHourlyForecast(url: hourlyForecastUrl) {
+                for item in forecastRequest {
+                    forecast.append(Forecast(number: item.number, name: item.name, startTime: convertToDate(string: item.startTime), endTime: convertToDate(string: item.endTime), isDaytime: item.isDaytime, temperature: item.temperature, probabilityOfPrecipitation: Int(item.probabilityOfPrecipitation.value ?? 0), dewpointTemperature: celsiusToFahrenheit(celsius: item.dewpoint.value), relativeHumidity: Int(item.relativeHumidity.value), windSpeed: item.windSpeed, windDirection: item.windDirection, icon: item.icon, shortForecast: item.shortForecast, detailedForecast: item.detailedForecast, hourlyForecast: sortHourlyForecast(startTime: convertToDate(string: item.startTime), endTime: convertToDate(string: item.endTime), forecast: hourlyForecast)))
+                }
+            } else {
+                return nil
             }
         } else {
             return nil
         }
         return forecast
+    }
+    func getHourlyForecast(url: String) async -> [HourlyForecast]? {
+        var forecast: [HourlyForecast] = []
+        if let forecastRequest = await forecastUrlRequest(url: url) {
+            for item in forecastRequest {
+                forecast.append(HourlyForecast(number: item.number, startTime: convertToDate(string: item.startTime), endTime: convertToDate(string: item.endTime), hourOfDay: "", isDaytime: item.isDaytime, temperature: item.temperature, probabilityOfPrecipitation: Int(item.probabilityOfPrecipitation.value ?? 0), dewpointTemperature: Int(item.dewpoint.value), relativeHumidity: Int(item.relativeHumidity.value), windSpeed: item.windSpeed, windDirection: item.windDirection, icon: item.icon, shortForecast: item.shortForecast))
+            }
+        } else {
+            return nil
+        }
+        return forecast
+    }
+    func sortHourlyForecast(startTime: Date, endTime: Date, forecast: [HourlyForecast]) -> [HourlyForecast] {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh a"
+        var sortedForecast: [HourlyForecast] = []
+        let range = startTime...endTime
+        for item in forecast {
+            if range.contains(item.startTime) && range.contains(item.endTime) {
+                var newItem = item
+                newItem.hourOfDay = formatter.string(from: item.startTime)
+                sortedForecast.append(newItem)
+            }
+        }
+        sortedForecast.sort {
+            $0.number < $1.number
+        }
+        return sortedForecast
     }
     
     // Url requests
@@ -124,5 +151,15 @@ class DataManager: ObservableObject {
         let celsius = Measurement(value: celsius, unit: UnitTemperature.celsius)
         let fahrenheit = Int(celsius.converted(to: .fahrenheit).value)
         return fahrenheit
+    }
+    func convertToDate(string: String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssXXX"
+        if let date = dateFormatter.date(from: string) {
+            return date
+        } else {
+            print("Error parsing date")
+            return Date()
+        }
     }
 }

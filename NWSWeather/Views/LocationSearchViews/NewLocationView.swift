@@ -36,7 +36,7 @@ struct NewLocationView: View {
             if let location = await dataManager.locationUrlsRequest(latitude: latitude, longitude: longitude) {
                     locationInfo = Location(sortOrder: 0, city: city, state: state, officeId: location.gridId, dailyForecastUrl: location.forecast, hourlyForecastUrl: location.forecastHourly)
             }
-            if let forecast = await dataManager.getForecast(url: locationInfo?.dailyForecastUrl ?? "") {
+            if let forecast = await dataManager.getForecast(dailyForecastUrl: locationInfo?.dailyForecastUrl ?? "", hourlyForecastUrl: locationInfo?.hourlyForecastUrl ?? "") {
                 self.forecast = forecast
             }
         }

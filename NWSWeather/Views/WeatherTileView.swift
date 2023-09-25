@@ -22,7 +22,7 @@ struct WeatherTileView: View {
                         .fontDesign(.serif)
                     Divider()
                         .frame(height: 1)
-                        .overlay(.primary)
+                        .overlay(.dividerLines)
                     HStack {
                         HStack(spacing: 0) {
                             Text(period.isDaytime ? "High: " : "Low: ")
@@ -34,7 +34,7 @@ struct WeatherTileView: View {
                         Spacer()
                         Divider()
                             .frame(width: 1)
-                            .overlay(.primary)
+                            .overlay(.dividerLines)
                         Spacer()
                         HStack(spacing: 0) {
                             Text("Chance Rain: ")
@@ -46,7 +46,7 @@ struct WeatherTileView: View {
                     }
                     Divider()
                         .frame(height: 1)
-                        .overlay(.primary)
+                        .overlay(.dividerLines)
                     HStack(spacing: 0) {
                         Text("Wind: ")
                             .font(.system(size: 16))
@@ -61,7 +61,7 @@ struct WeatherTileView: View {
             }
             Divider()
                 .frame(height: 1)
-                .overlay(.primary)
+                .overlay(.dividerLines)
             if !expand {
                 Text(period.shortForecast)
                     .font(.system(size: 18))
@@ -72,7 +72,7 @@ struct WeatherTileView: View {
                     .font(.system(size: 18))
                 Divider()
                     .frame(height: 1)
-                    .overlay(.primary)
+                    .overlay(.dividerLines)
                 HStack {
                     HStack(spacing: 0) {
                         Text("Dewpoint: ")
@@ -84,7 +84,7 @@ struct WeatherTileView: View {
                     Spacer()
                     Divider()
                         .frame(width: 1)
-                        .overlay(.primary)
+                        .overlay(.dividerLines)
                     Spacer()
                     HStack(spacing: 0) {
                         Text("Relative Humidity: ")
@@ -94,12 +94,24 @@ struct WeatherTileView: View {
                             .font(.system(size: 20))
                     }
                 }
+                Divider()
+                    .frame(height: 1)
+                    .overlay(.dividerLines)
+                // Hourly Forecast
+                ScrollView(.horizontal) {
+                    HStack {
+                        ForEach(period.hourlyForecast) { period in
+                            HourlyForecastTileView(period: period)
+                        }
+                    }
+                    .padding(4)
+                }
             }
         }
         .foregroundStyle(Color.primary)
         .contentShape(Rectangle())
         .onTapGesture {
-            withAnimation(.easeInOut) {
+            withAnimation(.smooth) {
                 expand.toggle()
             }
         }
@@ -108,22 +120,3 @@ struct WeatherTileView: View {
         .clipShape(.rect(cornerRadius: 10))
     }
 }
-
-
-///var isDaytime: Bool
-///var temperature: Int
-///var temperatureUnit: String
-///var probabilityOfPrecipitation: Int
-///var probabilityOfPrecipitationUnit: String
-
-///var dewpointTemperature: Int
-///var dewpointUnit: String
-///var relativeHumidity: Int
-///var relativeHumidityUnit: String
-
-///var windSpeed: String
-///var windDirection: String
-///var icon: String
-///var shortForecast: String
-
-///var detailedForecast: String
