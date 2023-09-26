@@ -8,32 +8,15 @@
 import SwiftUI
 
 struct LocationListRowView: View {
+    @Environment(\.editMode) private var editmode
     @EnvironmentObject private var dataManager: DataManager
     var location: Location
     var isUserLocation: Bool
     @State private var locationViewModel: LocationViewModel?
-    @State private var locationSheet: LocationViewModel?
     var body: some View {
         VStack {
             if let locationViewModel = locationViewModel {
-                Button(action: {
-                    locationSheet = locationViewModel
-                }) {
-                    if isUserLocation {
-                        Text("My Location")
-                            .font(.title3)
-                    }
-                    Text(locationViewModel.city)
-                        .font(.title)
-                    ScrollView(.horizontal) {
-                        HStack {
-                            ForEach(locationViewModel.dailyForecast) { period in
-                                Text("\(period.temperature)"+" "+period.temperatureUnit)
-                                    .font(.title2)
-                            }
-                        }
-                    }
-                }
+                LocationListTileView(locationViewModel: locationViewModel, todaysForecast: locationViewModel.dailyForecast.first!, isUserLocation: isUserLocation)
             } else {
                 Text("Loading...")
             }
@@ -41,15 +24,6 @@ struct LocationListRowView: View {
         .task {
             if let locationViewModel = await dataManager.getLocationViewModel(location: location) {
                 self.locationViewModel = locationViewModel
-                // Load users location 
-                if isUserLocation {
-                    locationSheet = locationViewModel
-                }
-            }
-        }
-        .fullScreenCover(item: $locationSheet) { location in
-            NavigationStack {
-                LocationWeatherView(locationViewModel: location)
             }
         }
     }

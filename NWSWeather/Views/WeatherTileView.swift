@@ -104,7 +104,7 @@ struct WeatherTileView: View {
                             HourlyForecastTileView(period: period)
                         }
                     }
-                    .padding(4)
+                    .padding(2)
                 }
             }
         }

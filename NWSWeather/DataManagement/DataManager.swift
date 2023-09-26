@@ -97,7 +97,8 @@ class DataManager: ObservableObject {
             return nil
         }
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+//            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession(configuration: .ephemeral).data(from: url)
             return try? JSONDecoder().decode(LocationUrlPropertiesModel.self, from: data).properties
         } catch {
             print("Invalid Data")
@@ -110,7 +111,8 @@ class DataManager: ObservableObject {
             return nil
         }
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+//            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession(configuration: .ephemeral).data(from: url)
             return try? JSONDecoder().decode(ForecastFileModel.self, from: data).properties.periods
         } catch {
             print("Invalid Data")
@@ -124,7 +126,8 @@ class DataManager: ObservableObject {
             return nil
         }
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+//            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession(configuration: .ephemeral).data(from: url)
             return try? JSONDecoder().decode(ProductsFileModel.self, from: data).graph.first?.id
         } catch {
             print("Invalid Data")
@@ -138,7 +141,8 @@ class DataManager: ObservableObject {
             return nil
         }
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+//            let (data, _) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession(configuration: .ephemeral).data(from: url)
             return try? JSONDecoder().decode(DiscussionModel.self, from: data).productText
         } catch {
             print("Invalid Data")
