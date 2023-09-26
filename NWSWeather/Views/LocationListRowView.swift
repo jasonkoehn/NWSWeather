@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct LocationListRowView: View {
-    @Environment(\.editMode) private var editmode
-    @EnvironmentObject private var dataManager: DataManager
-    var location: Location
-    var isUserLocation: Bool
-    @State private var locationViewModel: LocationViewModel?
+    var locationId: UUID
+    @Binding var locationViewModels: [LocationViewModel]
+    @State private var locationModel: LocationViewModel?
     var body: some View {
         VStack {
-            if let locationViewModel = locationViewModel {
-                LocationListTileView(locationViewModel: locationViewModel, todaysForecast: locationViewModel.dailyForecast.first!, isUserLocation: isUserLocation)
+            if let locationModel = locationModel {
+                LocationListTileView(locationViewModel: locationModel, todaysForecast: locationModel.dailyForecast.first!, isUserLocation: false)
             } else {
                 Text("Loading...")
             }
         }
-        .task {
-            if let locationViewModel = await dataManager.getLocationViewModel(location: location) {
-                self.locationViewModel = locationViewModel
+        .onChange(of: locationViewModels, initial: false) { oldLocations, newLocations in
+            for location in newLocations {
+                if location.id == locationId {
+                    locationModel = location
+                }
             }
         }
     }

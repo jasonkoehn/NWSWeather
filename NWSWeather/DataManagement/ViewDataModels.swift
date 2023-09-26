@@ -124,7 +124,7 @@ struct HourlyForecast: Equatable, Identifiable {
 }
 
 
-struct LocationViewModel: Identifiable {
+struct LocationViewModel: Equatable, Identifiable {
     var id: UUID
     var city: String
     var state: String
