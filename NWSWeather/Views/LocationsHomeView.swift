@@ -14,8 +14,7 @@ struct LocationsHomeView: View {
     @EnvironmentObject private var dataManager: DataManager
     @Environment(\.modelContext) private var context
     @Query(sort: \Location.sortOrder) private var locations: [Location]
-    @State private var locationViewModels: [LocationViewModel] = []
-    @State private var userLocationViewModel: LocationViewModel?
+    @State private var userLocation: Location?
     @State private var showSettingsView: Bool = false
     var body: some View {
         NavigationStack {
@@ -24,8 +23,8 @@ struct LocationsHomeView: View {
                     
                     
                     // MARK: User Location View
-                    if let userLocationViewModel = userLocationViewModel {
-                        LocationListTileView(locationViewModel: userLocationViewModel, todaysForecast: userLocationViewModel.dailyForecast.first!, isUserLocation: true)
+                    if let userLocation = userLocation {
+                        LocationListRowView(location: userLocation, isUserLocation: true)
                             .listRowSeparator(.hidden)
                     } else {
                         // Loading View
@@ -35,7 +34,7 @@ struct LocationsHomeView: View {
                     
                     // MARK: Other Locations
                     ForEach(locations) { location in
-                        LocationListRowView(locationId: location.id, locationViewModels: $locationViewModels)
+                        LocationListRowView(location: location, isUserLocation: false)
                             .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: { indexSet in
@@ -46,18 +45,9 @@ struct LocationsHomeView: View {
                     .onMove(perform: move)
                 }
                 .navigationTitle("Weather Forecasts")
-                .refreshable {
-                    if let userLocation = await dataManager.getUserLocation(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude) {
-                        if let locationViewModel = await dataManager.getLocationViewModel(location: userLocation) {
-                            self.userLocationViewModel = locationViewModel
-                        }
-                    }
-                    for location in locations {
-                        if let locationViewModel = await dataManager.getLocationViewModel(location: location) {
-                            locationViewModels.append(locationViewModel)
-                        }
-                    }
-                }
+//                .refreshable {
+
+//                }
                 .listStyle(.plain)
                 .toolbar {
                     ToolbarItemGroup(placement: .topBarTrailing) {
@@ -74,16 +64,8 @@ struct LocationsHomeView: View {
         }
         .searchable(text: $locationSearchManager.searchText)
         .task {
-            print("home")
-            if let userLocation = await dataManager.getUserLocation(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude) {
-                if let locationViewModel = await dataManager.getLocationViewModel(location: userLocation) {
-                    self.userLocationViewModel = locationViewModel
-                }
-            }
-            for location in locations {
-                if let locationViewModel = await dataManager.getLocationViewModel(location: location) {
-                    locationViewModels.append(locationViewModel)
-                }
+            if userLocationManager.authorisationStatus == .authorizedWhenInUse {
+                userLocation = await dataManager.getUserLocation(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude)
             }
         }
     }
