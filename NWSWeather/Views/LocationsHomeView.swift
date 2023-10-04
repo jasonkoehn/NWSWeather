@@ -16,6 +16,7 @@ struct LocationsHomeView: View {
     @Query(sort: \Location.sortOrder) private var locations: [Location]
     @State private var userLocation: Location?
     @State private var showSettingsView: Bool = false
+    @State private var reload: Bool = false
     var body: some View {
         NavigationStack {
             if locationSearchManager.searchText == "" {
@@ -24,7 +25,7 @@ struct LocationsHomeView: View {
                     
                     // MARK: User Location View
                     if let userLocation = userLocation {
-                        LocationListRowView(location: userLocation, isUserLocation: true)
+                        LocationListRowView(location: userLocation, isUserLocation: true, reload: $reload)
                             .listRowSeparator(.hidden)
                     } else {
                         // Loading View
@@ -34,7 +35,7 @@ struct LocationsHomeView: View {
                     
                     // MARK: Other Locations
                     ForEach(locations) { location in
-                        LocationListRowView(location: location, isUserLocation: false)
+                        LocationListRowView(location: location, isUserLocation: false, reload: $reload)
                             .listRowSeparator(.hidden)
                     }
                     .onDelete(perform: { indexSet in
@@ -45,9 +46,9 @@ struct LocationsHomeView: View {
                     .onMove(perform: move)
                 }
                 .navigationTitle("Weather Forecasts")
-//                .refreshable {
-
-//                }
+                .refreshable {
+                    reload = true
+                }
                 .listStyle(.plain)
                 .toolbar {
                     ToolbarItemGroup(placement: .topBarTrailing) {

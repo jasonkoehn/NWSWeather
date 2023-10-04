@@ -29,7 +29,7 @@ class Location {
         self.state = state
         self.officeId = officeId
         self.dailyForecastUrl = dailyForecastUrl
-        self.hourlyForecastUrl = hourlyForecastUrl
+        self.hourlyForecastUrl = hourlyForecastUr
     }
 }
 

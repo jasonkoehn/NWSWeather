@@ -11,6 +11,7 @@ struct LocationListRowView: View {
     @EnvironmentObject private var dataManager: DataManager
     var location: Location
     var isUserLocation: Bool
+    @Binding var reload: Bool
     @State private var locationViewModel: LocationViewModel?
     var body: some View {
         VStack {
@@ -20,8 +21,10 @@ struct LocationListRowView: View {
                 Text("Loading...")
             }
         }
-        .task {
-            locationViewModel = await dataManager.getLocationViewModel(location: location)
+        .onChange(of: reload, initial: true) {
+            Task {
+                locationViewModel = await dataManager.getLocationViewModel(location: location)
+            }
         }
     }
 }
