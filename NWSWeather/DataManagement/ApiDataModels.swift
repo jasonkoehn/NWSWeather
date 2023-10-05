@@ -32,7 +32,6 @@ struct ForecastItemsModel: Codable {
     var isDaytime: Bool
     var temperature: Int
     var temperatureUnit: String
-    var temperatureTrend: String?
     var probabilityOfPrecipitation: ProbabilityOfPrecipitation
     var dewpoint: Dewpoint
     var relativeHumidity: RelativeHumidity

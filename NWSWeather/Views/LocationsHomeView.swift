@@ -23,12 +23,14 @@ struct LocationsHomeView: View {
                     
                     
                     // MARK: User Location View
-                    if let userLocation = userLocation {
-                        LocationListRowView(location: userLocation, isUserLocation: true)
-                            .listRowSeparator(.hidden)
-                    } else {
-                        // Loading View
-                        Text("Loading User Location")
+                    if userLocationManager.authorisationStatus == .authorizedWhenInUse {
+                        if let userLocationViewModel = userLocationViewModel {
+                            LocationListTileView(locationViewModel: userLocationViewModel, todaysForecast: userLocationViewModel.dailyForecast.first!, isUserLocation: true)
+                                .listRowSeparator(.hidden)
+                        } else {
+                            // Loading View
+                            Text("Loading User Location")
+                        }
                     }
                     
                     
@@ -64,8 +66,18 @@ struct LocationsHomeView: View {
         }
         .searchable(text: $locationSearchManager.searchText)
         .task {
+            print("home")
             if userLocationManager.authorisationStatus == .authorizedWhenInUse {
-                userLocation = await dataManager.getUserLocation(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude)
+                if let userLocation = await dataManager.getUserLocation(latitude: userLocationManager.latitude, longitude: userLocationManager.longitude) {
+                    if let locationViewModel = await dataManager.getLocationViewModel(location: userLocation) {
+                        self.userLocationViewModel = locationViewModel
+                    }
+                }
+            }
+            for location in locations {
+                if let locationViewModel = await dataManager.getLocationViewModel(location: location) {
+                    locationViewModels.append(locationViewModel)
+                }
             }
         }
     }
